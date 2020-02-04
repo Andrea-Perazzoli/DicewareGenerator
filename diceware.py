@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
 		if args.f: file = args.f
 		if args.s: separator = args.s
-		if args.n: nWords = args.n
+		if args.n: nWords = int(args.n)
 
 		passw = generatePassphrase(file=file, separator=separator, passPhraseWords=nWords)
 		if args.o:
