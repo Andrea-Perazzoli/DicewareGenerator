@@ -31,7 +31,7 @@ def generateWord(dictKeyLen=5):
 
 def generatePassphrase(file="default.txt", separator=" ", passPhraseWords = 5):
 	passphrase = ""
-	loadFile()
+	loadFile(file)
 	for i in range(passPhraseWords):
 		if passphrase != "":
 			passphrase += separator
