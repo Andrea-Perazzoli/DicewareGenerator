@@ -42,38 +42,38 @@ def copyToClipboard(what):
 	pyperclip.copy(what)
 
 def eraseClipboard(seconds=7):
-	try:
-		for i in range(seconds, 0, -1):
-			print("\r", end="[+] Erasing clipboard in " + str(i) + " seconds...")
-			sleep(1)
-	except KeyboardInterrupt:
-		pass
-	finally:
-		print("\n[+] Clipboard erased!")
-		pyperclip.copy("")
-
+	for i in range(seconds, 0, -1):
+		print("\r", end="[+] Erasing clipboard in " + str(i) + " seconds...")
+		sleep(1)
+	pyperclip.copy("")
+	print("\n[+] Clipboard erased!")
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser(prog='Diceware Password generator')
-	parser.add_argument('-o', help='Print passphrase to stdout', action="store_true")
-	parser.add_argument('-f', metavar="FILE", help='File path to Diceware words')
-	parser.add_argument('-s', metavar="SEPARATOR", help='Separator')
-	parser.add_argument('-n', metavar="N_WORDS", help='Number of words')
-	args = parser.parse_args()
+	try:
+		parser = argparse.ArgumentParser(prog='Diceware Password generator')
+		parser.add_argument('-o', help='Print passphrase to stdout', action="store_true")
+		parser.add_argument('-f', metavar="FILE", help='File path to Diceware words')
+		parser.add_argument('-s', metavar="SEPARATOR", help='Separator')
+		parser.add_argument('-n', metavar="N_WORDS", help='Number of words')
+		args = parser.parse_args()
 
-	separator = " "
-	file = "default.txt"
-	nWords = 5
+		separator = " "
+		file = "default.txt"
+		nWords = 5
 
-	if args.f: file = args.f
-	if args.s: separator = args.s
-	if args.n: nWords = args.n
+		if args.f: file = args.f
+		if args.s: separator = args.s
+		if args.n: nWords = args.n
 
-	passw = generatePassphrase(file=file, separator=separator, passPhraseWords=nWords)
-	if args.o:
-		print(passw)
-	copyToClipboard(passw)
-	eraseClipboard(11)
+		passw = generatePassphrase(file=file, separator=separator, passPhraseWords=nWords)
+		if args.o:
+			print(passw)
+		copyToClipboard(passw)
+		eraseClipboard(10)
+
+	except KeyboardInterrupt:
+		pyperclip.copy("")
+		print("\n[+] Clipboard erased!")
 
 
 
