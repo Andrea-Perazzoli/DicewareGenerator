@@ -19,8 +19,11 @@ def loadFile(file="default.txt"):
 	if not d:
 		raise RuntimeError("[-] Dict not populated!")
 
-def generateRandomNumberInString(maxDigit=6):
-	return str(secrets.randbelow(maxDigit) + 1)
+def generateRandomNumberInString():
+	generated = 0
+	while generated not in range(1, 7):
+		generated = secrets.randbelow(7)
+	return str(generated)
 
 def generateWord(dictKeyLen=5):
 	global d
@@ -32,6 +35,7 @@ def generateWord(dictKeyLen=5):
 def generatePassphrase(file="default.txt", separator=" ", passPhraseWords = 5):
 	passphrase = ""
 	loadFile(file)
+	print("[+] Generating passphrase...")
 	for i in range(passPhraseWords):
 		if passphrase != "":
 			passphrase += separator
